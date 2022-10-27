@@ -1,0 +1,24 @@
+
+
+  
+ 
+  
+
+  .form_general{
+    text-align: justify;
+    font-size: 2em;
+	  font-family: sans-serif;
+    padding: 10rem;
+    margin-top: -10rem;
+    
+  }
+  label
+{
+	width: 100px; 
+
+  text-align: justify;
+}
+.form_parametrage{
+  background-color: white;
+  padding: 10rem;
+}
