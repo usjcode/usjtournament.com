@@ -4,6 +4,10 @@ body{
     /* font-family: 'Montserrat', sans-serif; */
 
    }
+   #log1{
+    width: 50%;
+    
+   }
    #container{
     width:400px;
     margin:0 auto;
@@ -11,7 +15,16 @@ body{
     background: #eaebf1;
     border-radius: 5%;
     padding: 25px;
+    border: 1px #b4b7ccd5 solid;
    }
+   /*gestion des espaces*/
+   #c1{
+    margin-bottom: 20px;
+   }
+   #c2{
+    margin-bottom: 20px;
+   }
+   
    /* forme des bordures*/
    form {
     width:100%;
