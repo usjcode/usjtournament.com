@@ -1,24 +1,73 @@
-
-
-  
- 
-  
-
-  .form_general{
-    text-align: justify;
-    font-size: 2em;
-	  font-family: sans-serif;
-    padding: 10rem;
-    margin-top: -10rem;
-    
-  }
-  label
-{
-	width: 100px; 
-
+*{
+  margin: 0;
+  padding: 0;
+}
+.form_general{
   text-align: justify;
+  font-size: 1.2em;
+  font-family: sans-serif;
+}
+h1{
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  margin-right: 150px;
+  color: rgb(49, 49, 118);
 }
 .form_parametrage{
-  background-color: white;
-  padding: 10rem;
+  padding: 15px;
+  height: 84%;
+  width: 900px;
+ background-color: white;
+ box-shadow: 5PX 7px 5px 5px rgb(228, 228, 228);
+} 
+
+#formFile {
+  opacity: 0;
+  width: 100%; height: 100%;
+}
+
+.form-control{
+  padding:.5rem 1rem;
+  font-size:1.3rem;
+  width: 100%;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+#enregistrer{
+  border-color: green;
+  width: 20%;
+  font-size:1.3rem;
+  background-color:rgb(43, 43, 112);
+  height: 45px;
+  color: rgb(228, 228, 228);
+  box-shadow: 5PX 7px 5px 5px rgb(228, 228, 228);
+}
+
+.btn-enr{
+  text-align: center;
+}
+
+input{
+  border-color: white;
+  font-size:5rem;
+}
+
+.profile {
+  position: absolute;
+  display: flex; align-items: center;
+  bottom: 20px; left: 25px;
+}
+
+#container {
+  margin: auto;
+  width: 25%; height: 200px;
+  background-image: url('b1.jpg');
+  background-size: cover;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 175px; height: 180px;
+  border-radius: 50%;
+  border: 3px solid #2b337d;
 }
