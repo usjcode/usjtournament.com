@@ -60,12 +60,11 @@ body{
     cursor: pointer;
     width: 100%;
     border-radius: 5px;
-
+    margin-top: 20px;
    }
-   /* input[type=submit]:hover {
+   input[type=submit]:hover {
     background-color: white;
     color: #53af57;
-    /* border: 0.5px solid #53af57; 
-
-   } */
-
+     border: 0.5px solid #53af57; 
+   }
+   
