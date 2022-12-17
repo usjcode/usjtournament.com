@@ -2,24 +2,14 @@
   margin: 0;
   padding: 0;
 }
-.form_general{
-  text-align: justify;
-  font-size: 1.2em;
-  font-family: sans-serif;
-}
-h1{
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 30px;
-  margin-right: 150px;
-  color: rgb(45, 68, 136);
-}
+
 .form_parametrage{
-  padding: 15px;
-  height: 80%;
-  width: 900px;
- background-color: white;
- box-shadow: 5PX 7px 5px 5px rgb(228, 228, 228);
+    width:950px;
+    margin:0 auto;
+    margin-top:3%;
+    background: white;
+    padding: 25px;
+    border: 1px #b4b7ccd5 solid;
 } 
 
 #formFile {
@@ -38,26 +28,68 @@ h1{
 #enregistrer, #annuler{
   width: 20%;
   font-size:1.3rem;
-  background-color:rgb(26, 74, 122);
-  height: 45px;
-  color: rgb(228, 228, 228);
+  background-color:rgb(26, 105, 224);
+  height: 35px;
   box-shadow: 5PX 7px 5px 5px rgb(228, 228, 228);
   margin-left: 15%;
   margin-right: 15%;
-
+  border: none;
+  color: white;
+}
+#modif-passwd{
+  width: 100%;
+  height: 45px;
+  font-size:1.3rem;
+  border: none;
+  background-color:rgb(26, 105, 224);
+  color: white;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  
 }
 
+#enregistrer-passwd, #annuler-passwd, #passwd-oublier, #passwd-réini,#passwd-continuer,#annuler-reini{
+  height: 45px;
+  width: 100%;
+  font-size:1.3rem;
+  border: none;
+}
+
+#enregistrer-passwd,#passwd-continuer{
+  color: white;
+  background-color: rgb(26, 105, 224);
+}
+
+#annuler-passwd,#annuler-reini{
+  background-color: white;
+ 
+}
+
+#passwd-oublier{
+  color: rgb(26, 105, 224);
+  background: none;
+  border: none;
+}
+
+#passwd-réini{
+  color: rgb(26, 105, 224);
+  background-color: white;
+}
 .btn{
   display: flex;
   flex-direction: row;
-  /* text-align: center; */
-  /* align-items:flex-start; */
+  text-align: center;
+  align-items:flex-start;
 }
 
-input{
-  border-color: white;
-  font-size:5rem;
-}
+input[type=text], input[type=text], input[type=email]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+ }
 
 .profile {
   position: absolute;
@@ -65,7 +97,7 @@ input{
   bottom: 20px; left: 25px;
 }
 
-#container {
+.container {
   margin: auto;
   width: 25%; height: 200px;
   background-image: url('b1.jpg');
@@ -74,5 +106,58 @@ input{
   overflow: hidden;
   width: 175px; height: 180px;
   border-radius: 50%;
-  border: 3px solid black;
+}
+
+#d1 {
+  display:block;
+}
+
+#d2 {
+  display:none;
+}
+
+#d3 {
+  display:none;
+}
+
+#d4 {
+  display:none;
+}
+
+#maj {
+  width: 35%;
+  color: white;
+  font-size:1.3rem;
+  background-color:rgb(26, 105, 224);
+  height: 35px;
+  box-shadow: 5PX 7px 5px 5px rgb(228, 228, 228);
+  margin-left: 35%;
+  border: none;
+}
+
+.c-aff {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 35%;
+}
+
+.imgc{
+  width: 25px; 
+  height: 25px;
+}
+
+.ipre{
+  font-size: 1.5rem;
+}
+
+label{
+  font-size: 1.5rem;
+}
+
+h1{
+  text-align: center;
+  color: rgb(26, 105, 224);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:2rem;
 }
