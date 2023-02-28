@@ -1,0 +1,82 @@
+aside
+{
+    display: flex;
+    background-color: #111;
+    flex-direction: column;
+    height: 100%;
+    min-width: 200px;
+    
+
+}
+
+.menu
+{
+    display: flex;
+    flex-direction: column;
+}
+
+
+aside a
+{
+    padding: 20px 7px;
+    color: rgb(228, 228, 228);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+aside a:hover
+{
+    padding: 20px 7px;
+    color: rgb(255, 255, 255);
+
+
+}
+
+.menu a.active
+{
+ 
+    color: rgb(0, 174, 255);
+
+}
+
+.menu a:nth-child(1).active
+{
+ 
+    color: rgb(247, 243, 6);
+
+}
+
+.menu a:nth-child(2).active
+{
+ 
+    color: rgb(18, 218, 0);
+
+}
+
+.menu a:nth-child(3).active
+{
+ 
+    color: rgb(255, 0, 85);
+
+}
+
+.menu a:hover:not(.active)
+{
+    padding: 20px 7px;
+    background-color: rgb(0, 174, 255);
+
+}
+
+.bottom
+{
+    position: absolute;
+    bottom: 0;
+}
+
+.icon
+{
+width: 64px;
+justify-self: center;
+}
