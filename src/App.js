@@ -1,13 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
 import { Staff } from './pages/personnel/staff';
 import {
   Routes,
   Route,
-  Outlet,
-  Link,
-  useMatch,
-  useResolvedPath,
+  Outlet
 } from "react-router-dom";
 import Sidebar from './components/sidebar/sidebar';
 import { Tournaments } from './pages/concours/tournaments';

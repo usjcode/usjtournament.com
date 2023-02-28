@@ -1,5 +1,4 @@
 
-import Addtabs from '../../components/candidats/addtabs'
 import Aboutcontent from '../../components/about/aboutcontent'
 import './about.css'
 import AboutNavigation from '../../components/about/navigation'
