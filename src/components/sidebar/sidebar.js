@@ -1,7 +1,7 @@
 
 import React, { useContext } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {  NavLink } from "react-router-dom"
+import {  Link, NavLink } from "react-router-dom"
 import { faTrophy ,faFileAlt,faUsers,faCircleInfo,faSignOut} from '@fortawesome/free-solid-svg-icons'
 
 import './sidebar.css'
@@ -35,11 +35,11 @@ export default  function Sidebar()
            </div>
 
            <div className='bottom'>
-           <link to='#' onClick={logoutUser}>
+           <Link to='#' onClick={logoutUser}>
              <FontAwesomeIcon icon={faSignOut} className="icon" size="2x"  />
              <span>se deconnecter</span>
 
-             </link>
+             </Link>
            </div>
         </aside>
     )
