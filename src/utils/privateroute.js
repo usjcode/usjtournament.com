@@ -1,7 +1,7 @@
-import { Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../context/authcontext";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../components/sidebar/sidebar";
+import AuthContext from "../context/authcontext";
 
 function Layout()
 {

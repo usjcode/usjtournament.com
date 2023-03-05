@@ -9,7 +9,7 @@ import AuthContext from '../../context/authcontext'
 
 export default  function Sidebar()
 {
-  const { user, logoutUser } = useContext(AuthContext);
+  const {  logoutUser } = useContext(AuthContext);
     return(
         <aside>
            <div className="menu">
@@ -35,11 +35,11 @@ export default  function Sidebar()
            </div>
 
            <div className='bottom'>
-           <a onClick={logoutUser}>
+           <link to='#' onClick={logoutUser}>
              <FontAwesomeIcon icon={faSignOut} className="icon" size="2x"  />
              <span>se deconnecter</span>
 
-             </a>
+             </link>
            </div>
         </aside>
     )
