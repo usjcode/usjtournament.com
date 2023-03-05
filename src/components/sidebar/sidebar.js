@@ -1,14 +1,15 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {  NavLink } from "react-router-dom"
 import { faTrophy ,faFileAlt,faUsers,faCircleInfo,faSignOut} from '@fortawesome/free-solid-svg-icons'
 
 import './sidebar.css'
+import AuthContext from '../../context/authcontext'
 
 export default  function Sidebar()
 {
-    
+  const { user, logoutUser } = useContext(AuthContext);
     return(
         <aside>
            <div className="menu">
@@ -34,11 +35,11 @@ export default  function Sidebar()
            </div>
 
            <div className='bottom'>
-           <NavLink to="/"      className={({ isActive }) =>isActive ? 'active'  : undefined}>
+           <a onClick={logoutUser}>
              <FontAwesomeIcon icon={faSignOut} className="icon" size="2x"  />
              <span>se deconnecter</span>
 
-             </NavLink>
+             </a>
            </div>
         </aside>
     )

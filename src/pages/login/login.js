@@ -1,11 +1,22 @@
 import { Button, Stack, TextField } from "@mui/material";
 import logo from '../../assets/logo.jpg'
+import AuthContext from "../../context/authcontext";
+import { useContext } from "react";
 
 export default  function Login()
 {
+
+  const { loginUser } = useContext(AuthContext);
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(e.target)
+    const username = e.target.email.value;
+    const password = e.target.password.value;
+    username.length > 0 && loginUser(username, password);
+  };
     return (
         <div className="isj">
-        <form className="loginform">
+        <form className="loginform" onSubmit={handleSubmit}>
         <img src={logo} width={100} style={{marginBottom:5}}/>
    <Stack spacing={1}
    width={"100%"}>
@@ -27,7 +38,7 @@ export default  function Login()
             type="password"
           />
 
-          <Button
+          <Button type="submit"
           variant="contained" >
             Log in
           </Button>
