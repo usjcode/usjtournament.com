@@ -104,7 +104,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {  order, orderBy, onRequestSort } =
+  const { order, orderBy,  onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -221,7 +221,7 @@ EnhancedTableToolbar.propTypes = {
   const [selected, setSelected] = React.useState([]);
 
 
-  const handleRequestSort = ( property) => {
+  const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -229,7 +229,7 @@ EnhancedTableToolbar.propTypes = {
 
 
 
-  const handleClick = ( name) => {
+  const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -276,17 +276,17 @@ EnhancedTableToolbar.propTypes = {
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.anonymat);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.anonymat)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.anonymat}
                       selected={isItemSelected}
                     >
 
