@@ -1,18 +1,16 @@
-import './App.css';
-import { Staff } from './pages/personnel/staff';
 import {
-  Routes,
   Route,
-  Outlet
+  Routes
 } from "react-router-dom";
-import Sidebar from './components/sidebar/sidebar';
-import { Tournaments } from './pages/concours/tournaments';
-import Candidates from './pages/candidats/candidates';
-import Add from './pages/candidats/add';
-import About from './pages/about/about';
-import { Tournament } from './pages/concours/tournament';
-import Login from './pages/login/login';
+import './App.css';
 import { AuthProvider } from './context/authcontext';
+import About from './pages/about/about';
+import Add from './pages/candidats/add';
+import Candidates from './pages/candidats/candidates';
+import { Tournament } from './pages/concours/tournament';
+import { Tournaments } from './pages/concours/tournaments';
+import Login from './pages/login/login';
+import { Staff } from './pages/personnel/staff';
 import PrivateRoute from './utils/privateroute';
 
 
