@@ -17,7 +17,7 @@ export default  function Login()
     return (
         <div className="isj">
         <form className="loginform" onSubmit={handleSubmit}>
-        <img src={logo} width={100} style={{marginBottom:5}}/>
+        <img src={logo} width={100} alt={"logo"} style={{marginBottom:5}}/>
    <Stack spacing={1}
    width={"100%"}>
    <TextField

@@ -1,5 +1,5 @@
 import { Fab } from "@mui/material";
-import { Add, Article, Edit, EditAttributes, Remove } from "@mui/icons-material";
+import { Add, Article, Edit,  Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 
@@ -104,7 +104,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const {  order, orderBy, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -221,7 +221,7 @@ EnhancedTableToolbar.propTypes = {
   const [selected, setSelected] = React.useState([]);
 
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = ( property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -229,7 +229,7 @@ EnhancedTableToolbar.propTypes = {
 
 
 
-  const handleClick = (event, name) => {
+  const handleClick = ( name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
