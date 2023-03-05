@@ -1,7 +1,7 @@
 aside
 {
     display: flex;
-    background-color: #111;
+    background-color: #ffffff;
     flex-direction: column;
     height: 100%;
     min-width: 200px;
@@ -19,14 +19,14 @@ aside
 aside a
 {
     padding: 20px 7px;
-    color: rgb(228, 228, 228);
+    color: #222;
     display: flex;
     align-items: center;
     text-decoration: none;
 
 }
 
-aside a:hover
+.menu a:hover
 {
     padding: 20px 7px;
     color: rgb(255, 255, 255);
@@ -37,38 +37,48 @@ aside a:hover
 .menu a.active
 {
  
-    color: rgb(0, 174, 255);
+    color: rgb(255, 255, 255);
 
 }
 
-.menu a:nth-child(1).active
+.menu a
+{
+    --link-color: #12d9fc;
+}
+
+.menu a:nth-child(1)
 {
  
-    color: rgb(247, 243, 6);
+    --link-color: rgb(218, 214, 17);
 
 }
 
-.menu a:nth-child(2).active
+.menu a:nth-child(2)
 {
  
-    color: rgb(18, 218, 0);
+    --link-color: rgb(0, 132, 219);
 
 }
 
-.menu a:nth-child(3).active
+.menu a:nth-child(3)
 {
  
-    color: rgb(255, 0, 85);
+    --link-color: rgb(255, 0, 85);
 
 }
 
 .menu a:hover:not(.active)
 {
     padding: 20px 7px;
-    background-color: rgb(0, 174, 255);
+    
 
 }
 
+
+.menu a:hover, .menu a.active
+{
+    background-color: var(--link-color);
+}
 .bottom
 {
     position: absolute;

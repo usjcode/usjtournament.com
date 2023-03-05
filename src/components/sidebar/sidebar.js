@@ -2,7 +2,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {  NavLink } from "react-router-dom"
-import { faTrophy ,faFileAlt,faUsers,faCircleInfo,faDoorOpen} from '@fortawesome/free-solid-svg-icons'
+import { faTrophy ,faFileAlt,faUsers,faCircleInfo,faSignOut} from '@fortawesome/free-solid-svg-icons'
 
 import './sidebar.css'
 
@@ -35,7 +35,7 @@ export default  function Sidebar()
 
            <div className='bottom'>
            <NavLink to="/"      className={({ isActive }) =>isActive ? 'active'  : undefined}>
-             <FontAwesomeIcon icon={faDoorOpen} className="icon" size="2x"  />
+             <FontAwesomeIcon icon={faSignOut} className="icon" size="2x"  />
              <span>se deconnecter</span>
 
              </NavLink>

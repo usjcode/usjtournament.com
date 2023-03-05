@@ -12,6 +12,8 @@
 {
   width: 100%;
   box-shadow: 0 0 10px inset rgb(226, 226, 226);
+  padding: 20px;
+  background-color: #f1f1f1;
 }
 *
 {
@@ -52,4 +54,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.isj
+{
+  background-color: #fafafa;
+ 
+}
+
+
+ .loginform
+{
+   
+    max-width: 330px;
+    min-width: 330px;
+    box-shadow: 0 0 10px #eee;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 20px;
+    margin:  auto;
+    align-items: center;
+    border-radius: 10px;
+
+  
 }

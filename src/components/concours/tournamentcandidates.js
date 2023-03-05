@@ -1,5 +1,5 @@
-import { Button, Fab } from "@mui/material";
-import { Add, Edit, RemoveRedEye } from "@mui/icons-material";
+import { Fab } from "@mui/material";
+import { Add, Article, Edit, EditAttributes, Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 
@@ -24,11 +24,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 
-function createData(name, cni_number) {
+function createData(anonymat, nm) {
   return {
-    name,
-    cni_number,
-    
+    anonymat,
+    nm,
+
   };
 }
 
@@ -82,23 +82,24 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'anonymat',
     numeric: false,
     disablePadding: true,
     label: 'nom',
   },
   {
-    id: 'cni_number',
+    id: 'nm',
     numeric: true,
     disablePadding: false,
-    label: 'numero de cni',
+    label: 'notes manquantes',
   },
   {
     id: 'actions',
     numeric: true,
     disablePadding: false,
     label: 'actions',
-  },
+
+  }
 
 ];
 
@@ -115,7 +116,6 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={ 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -297,14 +297,10 @@ EnhancedTableToolbar.propTypes = {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.anonymat}
                       </TableCell>
-                      <TableCell align="left">{row.cni_number}</TableCell>
-                      <TableCell align="left">
-                        <IconButton><Edit/></IconButton>
-                        <IconButton><RemoveRedEye/></IconButton>
-                        
-                        </TableCell>
+                      <TableCell >{row.nm}</TableCell>
+                      <TableCell><IconButton><Remove/></IconButton> <IconButton><Article/></IconButton></TableCell>
                     </TableRow>
                   );
                 })}
@@ -327,7 +323,7 @@ EnhancedTableToolbar.propTypes = {
 }
 
 
-export function Candidateslist()
+export function Tournamentcandidate()
 {
     
     return (

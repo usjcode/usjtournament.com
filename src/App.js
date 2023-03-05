@@ -10,6 +10,8 @@ import { Tournaments } from './pages/concours/tournaments';
 import Candidates from './pages/candidats/candidates';
 import Add from './pages/candidats/add';
 import About from './pages/about/about';
+import { Tournament } from './pages/concours/tournament';
+import Login from './pages/login/login';
 
 function Layout()
 {
@@ -27,6 +29,7 @@ function Layout()
 function App() {
   return (
     <Routes>
+      <Route path="/login" element={<Login/>}/>
     <Route path="/" element={<Layout />}>
       <Route index element={<Tournaments />} />
       <Route path="staff" element={<Staff />} />
@@ -34,10 +37,16 @@ function App() {
       <Route index element={<Candidates />}/>
       <Route path="add" element={<Add />} />
 
+
       </Route>
    
       <Route path="about" element={<About />} />
       <Route path="*" redirect="/" />
+      <Route path="tournament">
+      <Route index navigate="/"/>
+
+        <Route path=":id" element={<Tournament/>} />
+      </Route>
     </Route>
   </Routes>
   );
