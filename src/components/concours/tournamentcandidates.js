@@ -1,4 +1,4 @@
-import { Fab } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, TextField } from "@mui/material";
 import { Add, Article, Edit,  Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -219,6 +219,10 @@ EnhancedTableToolbar.propTypes = {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
+  const [remove,setremove] = React.useState("")
+  const handleClose = () => {
+    setremove("");
+};
 
 
   const handleRequestSort = (event, property) => {
@@ -300,7 +304,7 @@ EnhancedTableToolbar.propTypes = {
                         {row.anonymat}
                       </TableCell>
                       <TableCell >{row.nm}</TableCell>
-                      <TableCell><IconButton><Remove/></IconButton> <IconButton><Article/></IconButton></TableCell>
+                      <TableCell><IconButton onClick={()=>setremove(row.anonymat)}><Remove/></IconButton> <IconButton><Article/></IconButton></TableCell>
                     </TableRow>
                   );
                 })}
@@ -318,6 +322,33 @@ EnhancedTableToolbar.propTypes = {
         </TableContainer>
 
       </Paper>
+
+      <Dialog open={(remove)} onClose={handleClose}>
+        <DialogTitle>retirer un candidat</DialogTitle>
+        <DialogContent>
+        <DialogContentText>
+        vous appretez a virer un candidat de ce concour si vous ete conscient de cela 
+        saisisez
+        {remove}
+        </DialogContentText>
+ 
+        <Stack spacing={3}>
+      <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="courte description"
+            type="text"
+            fullWidth
+          />
+
+
+        </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>retirer</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

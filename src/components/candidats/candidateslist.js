@@ -1,4 +1,4 @@
-import { Fab } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, TextField } from "@mui/material";
 import { Add, Edit, RemoveRedEye } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -219,6 +219,10 @@ EnhancedTableToolbar.propTypes = {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
+  const [remove,setremove] = React.useState("")
+  const handleClose = () => {
+    setremove("");
+};
 
 
   const handleRequestSort = (event, property) => {
@@ -254,6 +258,7 @@ EnhancedTableToolbar.propTypes = {
 
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+
 
 
 
@@ -303,7 +308,8 @@ EnhancedTableToolbar.propTypes = {
                       <TableCell align="left">
                         <IconButton><Edit/></IconButton>
                         <IconButton><RemoveRedEye/></IconButton>
-                        
+                        <IconButton onClick={(e)=>{e.stopPropagation();setremove(row.cni_number)}}><DeleteIcon/></IconButton>
+
                         </TableCell>
                     </TableRow>
                   );
@@ -322,6 +328,33 @@ EnhancedTableToolbar.propTypes = {
         </TableContainer>
 
       </Paper>
+
+      <Dialog open={(remove)} onClose={handleClose}>
+        <DialogTitle>retirer un candidat</DialogTitle>
+        <DialogContent>
+        <DialogContentText>
+        vous appretez a supprimer une candidature  si vous etes conscient de cela 
+        saisisez
+        {remove}
+        </DialogContentText>
+ 
+        <Stack spacing={3}>
+      <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="courte description"
+            type="text"
+            fullWidth
+          />
+
+
+        </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>retirer</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
