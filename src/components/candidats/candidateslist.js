@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, TextField } from "@mui/material";
 import { Add, Edit, RemoveRedEye } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 import * as React from 'react';
@@ -23,30 +23,12 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import axios from "axios";
 
-function createData(name, cni_number) {
-  return {
-    name,
-    cni_number,
-    
-  };
-}
 
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+
+
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -92,6 +74,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'numero de cni',
+  },
+  {
+    id: 'concours',
+    numeric: false,
+    disablePadding: false,
+    label: 'concours',
   },
   {
     id: 'actions',
@@ -149,7 +137,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-
+   const navigate =useNavigate()
   return (
     <Toolbar
       sx={{
@@ -203,7 +191,7 @@ function EnhancedTableToolbar(props) {
         </Tooltip>
       )}
     <Tooltip title="ajouter un nouveau candidat">
-          <IconButton>
+          <IconButton onClick={()=>{navigate("add")}}>
             <Add />
           </IconButton>
         </Tooltip>
@@ -219,11 +207,30 @@ EnhancedTableToolbar.propTypes = {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
-  const [remove,setremove] = React.useState("")
+  const [remove,setremove] = React.useState(undefined)
+  const [rows,setrows]=React.useState([])
   const handleClose = () => {
-    setremove("");
+    setremove(undefined);
 };
 
+const updatecandidates=async ()=>
+{
+    const response= await axios.get("http://127.0.0.1:8000/candidates/")
+    setrows(response.data)
+}
+
+const removecandidate=async (id)=>
+{
+  const response= await axios.delete("http://127.0.0.1:8000/candidates/"+id)
+  updatecandidates()
+
+
+}
+
+React.useEffect(()=>
+{
+  updatecandidates()
+},[])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -257,10 +264,11 @@ EnhancedTableToolbar.propTypes = {
 
 
 
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
+var setremcni=""
 
-
-
+console.log(rows)
 
   return (
     <Box sx={{ width: '100%',height:'100%' }}>
@@ -291,7 +299,7 @@ EnhancedTableToolbar.propTypes = {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
 
@@ -305,56 +313,64 @@ EnhancedTableToolbar.propTypes = {
                         {row.name}
                       </TableCell>
                       <TableCell align="left">{row.cni_number}</TableCell>
+                      <TableCell align="left">{row.tournament.type}</TableCell>
                       <TableCell align="left">
                         <IconButton><Edit/></IconButton>
                         <IconButton><RemoveRedEye/></IconButton>
-                        <IconButton onClick={(e)=>{e.stopPropagation();setremove(row.cni_number)}}><DeleteIcon/></IconButton>
+                        <IconButton onClick={(e)=>{e.stopPropagation();setremove(row)}}><DeleteIcon/></IconButton>
 
                         </TableCell>
                     </TableRow>
                   );
                 })}
             
-                <TableRow
-                  style={{
-                    height:40,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
+
         
             </TableBody>
           </Table>
         </TableContainer>
 
       </Paper>
+{
+(remove)&&(
+<Dialog open={remove} onClose={handleClose}>
+<DialogTitle>retirer un candidat</DialogTitle>
+<DialogContent>
+<DialogContentText>
+vous appretez a supprimer une candidature  si vous etes conscient de cela 
+saisisez
+<br/>
+{remove.cni_number}
+</DialogContentText>
 
-      <Dialog open={(remove)} onClose={handleClose}>
-        <DialogTitle>retirer un candidat</DialogTitle>
-        <DialogContent>
-        <DialogContentText>
-        vous appretez a supprimer une candidature  si vous etes conscient de cela 
-        saisisez
-        {remove}
-        </DialogContentText>
+<Stack spacing={3}>
+<TextField
+    autoFocus
+    margin="dense"
+    id="cni"
+    label="courte description"
+    type="text"
+    fullWidth
+    onChange={(e)=>{setremcni=e.target.value}}
+  />
+
+
+</Stack>
+</DialogContent>
+<DialogActions>
+  <Button onClick={()=>
+  {
+    if(setremcni==remove.cni_number)
+       {
+        removecandidate(remove.id)
+        handleClose()
+       }
+     
+  }}>retirer</Button>
+</DialogActions>
+</Dialog>)
+}
  
-        <Stack spacing={3}>
-      <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="courte description"
-            type="text"
-            fullWidth
-          />
-
-
-        </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>retirer</Button>
-        </DialogActions>
-      </Dialog>
     </Box>
   );
 }
@@ -366,11 +382,7 @@ export function Candidateslist()
     return (
         <div className="clw">
         <CandidateTable/>
-        <Link to="add" style={{right:0,bottom:0,position:"absolute"}}>
-        <Fab color="primary" aria-label="add" >
-        <Add/>
-      </Fab>
-        </Link>
+
 
         </div>
     )

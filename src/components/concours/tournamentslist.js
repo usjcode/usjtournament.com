@@ -1,26 +1,56 @@
-import { Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, TextField, Typography } from "@mui/material";
+import { Button, Card, CardActions, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
-import { Add } from "@mui/icons-material";
-import { useState  } from "react";
+import { Add, Construction } from "@mui/icons-material";
+import { useEffect, useState  } from "react";
 import {  useNavigate} from "react-router-dom";
 import { DesktopDatePicker } from "@mui/x-date-pickers";
 import moment from "moment";
 import React from "react";
+import axios from "axios";
+import { tournamentslist } from "../../data";
 
 
 
 
 function TournamentUpdateDialog(props)
 {
-  const [value, setValue] = React.useState(moment('2014-08-18T21:11:54'));
+  const [value, setValue] = React.useState('2014-08-18');
+  const {updatetournaments}=props
+const [description,setdescription]=useState("")
+const [tournament,settournament]=useState("cl1i")
+const {update,setupdate}=props
+
+
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-    const {update,setupdate}=props
+  const updtournament= async ()=>
+  {
+    const response= await  axios.patch(`http://127.0.0.1:8000/tournaments/${update}`,
+    {
+      "type":tournament,
+      "description":description,
+      "date_debut":value,
+      "nbr_place":100
+    })
+      updatetournaments()
+      
+  }
+
+
+  const submit = ()=>
+  {
+    updtournament()
+    handleClose()
+  }
+
+
+  
+
 
     const handleClose = () => {
         setupdate(-1);
@@ -38,6 +68,8 @@ function TournamentUpdateDialog(props)
             label="courte description"
             type="text"
             fullWidth
+            value={description}
+            onChange={(e)=>{setdescription(e.target.value)}}
           />
 
 <DesktopDatePicker
@@ -61,7 +93,7 @@ function TournamentUpdateDialog(props)
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>annuler</Button>
-          <Button onClick={handleClose}>valider</Button>
+          <Button  onClick={submit}>valider</Button>
         </DialogActions>
       </Dialog>
 
@@ -73,17 +105,42 @@ function TournamentUpdateDialog(props)
 
 function TournamentAddDialog(props)
 {
-  const [value, setValue] = React.useState('2014-08-18T21:11:54');
+
+  const [value, setValue] = React.useState('2014-08-18');
+  const {open,setOpen,updatetournaments}=props
+const [description,setdescription]=useState("")
+const [tournament,settournament]=useState("cl1i")
+
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-    const {open,setOpen}=props
+  const createtournament= async ()=>
+  {
+    const response= await  axios.post('http://127.0.0.1:8000/tournaments/',
+    {
+      "type":tournament,
+      "description":description,
+      "date_debut":value,
+      "nbr_place":100
+    })
+      updatetournaments()
+      
+
+  }
+
+
+  const submit = ()=>
+  {
+    createtournament()
+    handleClose()
+  }
 
     const handleClose = () => {
         setOpen(false);
     };
+    
     return(
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle>ajouter un concours</DialogTitle>
@@ -93,6 +150,23 @@ function TournamentAddDialog(props)
           </DialogContentText>
 
       <Stack spacing={3}>
+
+        <Select value={tournament} onChange={(e)=>{settournament(e.target.value)}} >
+        {
+          Object.keys(tournamentslist).map(k=>
+            {
+              return(
+                <MenuItem value={k}> 
+                {tournamentslist[k]}
+                     
+                </MenuItem>
+              )
+            })
+        }  
+
+          
+        </Select>
+      
       <TextField
             autoFocus
             margin="dense"
@@ -100,6 +174,8 @@ function TournamentAddDialog(props)
             label="courte description"
             type="text"
             fullWidth
+            value={description}
+            onChange={(e)=>{setdescription(e.target.value)}}
           />
 
 <DesktopDatePicker
@@ -125,7 +201,7 @@ function TournamentAddDialog(props)
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>annuler</Button>
-          <Button onClick={handleClose}>valider</Button>
+          <Button onClick={submit}>valider</Button>
         </DialogActions>
       </Dialog>
       
@@ -137,49 +213,81 @@ export function Tournamentslist()
   const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     const [update, setupdate] = useState(-1);
+    const[tournaments,settournaments]=useState([])
+
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    const deletetournament = async (id)=>
+    {
+      const response= await axios.delete(`http://127.0.0.1:8000/tournaments/${id}`)
+      updatetournaments()
 
+    }
+
+    const updatetournaments=async ()=>
+    {
+        const response= await axios.get("http://127.0.0.1:8000/tournaments/")
+        settournaments(response.data)
+    }
+
+    useEffect(() => {
+          updatetournaments()
+    },[])
 
     const handleClickupdate = (id) => {
         setupdate(id);
     };
 
+    
 
     return (
         <div className="tlw">
 
-            <div className="list">
-            <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 20}}  gutterBottom>
-          concour Management
-        </Typography>
-        <Typography  component="div" color="text.secondary">
-        date limite d'inscription  :
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        date de début du concours :
-        </Typography>
+            <div className="list" style={{height:"100%",overflow:"auto"}}>
+           {
+            tournaments.map(t=>{
+             
 
-      </CardContent>
-      <CardActions>
-        <Button size="small" onClick={()=>{navigate("/tournament/id");console.log("test")}}>consulter</Button>
-        <Button size="small" onClick={()=>{handleClickupdate(0)}} >modifier</Button>
-        <Button size="small">supprimer</Button>
-      </CardActions>
-    </Card>
+            
+              return(
+                <Card sx={{ minWidth: 275,marginTop:2 }}>
+                <CardContent>
+                  
+                  <Typography sx={{ fontSize: 20}}  color={( tournamentslist[t.type].indexOf("Management")>0)?"#f00":"#00f"}  gutterBottom>
+                    {tournamentslist[t.type]}
+                  </Typography>
+                  <Typography sx={{ fontSize: 15}}  gutterBottom>
+                    {t.description}
+                  </Typography>
+                  <Typography  component="div" color="text.secondary">
+                  date limite d'inscription  :{t.date_inscription}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  date de début du concours : {t.date_debut}
+                  </Typography>
+          
+                </CardContent>
+                <CardActions>
+                  <Button size="small" onClick={()=>{navigate("/tournament/"+t.id);console.log("test")}}>consulter</Button>
+                  <Button size="small" onClick={()=>{handleClickupdate(t.id)}} >modifier</Button>
+                  <Button size="small" onClick={()=>{deletetournament(t.id)}}>supprimer</Button>
+                </CardActions>
+              </Card>
+              )
+            })
+           }
+  
             </div>
             <Fab color="primary"  onClick={handleClickOpen} aria-label="add" sx={{right:0,bottom:0,position:"absolute"}}>
         <Add/>
       </Fab>
 
       <LocalizationProvider dateAdapter={AdapterMoment}>
-      <TournamentAddDialog open={open} setOpen={setOpen}/>
-      <TournamentUpdateDialog update={update} setupdate={setupdate}/>
+      <TournamentAddDialog open={open} updatetournaments={updatetournaments} setOpen={setOpen}/>
+      <TournamentUpdateDialog update={update} setupdate={setupdate}  updatetournaments={updatetournaments}/>
       </LocalizationProvider>
 
         </div>

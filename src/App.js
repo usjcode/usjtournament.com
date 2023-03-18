@@ -12,6 +12,7 @@ import { Tournaments } from './pages/concours/tournaments';
 import Login from './pages/login/login';
 import { Staff } from './pages/personnel/staff';
 import PrivateRoute from './utils/privateroute';
+import { StaffMember } from "./pages/personnel/staffmember";
 
 
 
@@ -23,6 +24,8 @@ function App() {
     <Route path="/" element={<PrivateRoute/>}>
       <Route index element={<Tournaments />} />
       <Route path="staff" element={<Staff />} />
+      <Route path="staff/:id" element={<StaffMember />} />
+
       <Route path="candidates" >
       <Route index element={<Candidates />}/>
       <Route path="add" element={<Add />} />

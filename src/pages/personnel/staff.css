@@ -1,9 +1,13 @@
 .slw
 {
     height: 100%;
+    display:grid;
+    grid-template-columns: auto auto auto;
+    gap: 40px;
+    grid-auto-rows: min-content;
 }
 
 .staff
 {
     height: 100%;
-}
+  }

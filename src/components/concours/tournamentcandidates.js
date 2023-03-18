@@ -1,6 +1,6 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Stack, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, Modal, Stack, TextField } from "@mui/material";
 import { Add, Article, Edit,  Remove } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 
 import * as React from 'react';
@@ -23,30 +23,52 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import axios from "axios";
 
-function createData(anonymat, nm) {
-  return {
-    anonymat,
-    nm,
 
+function NotationDialog(props)
+{
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: "700px",
+    height: "500px",
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
-}
 
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+const {notationid,rows}=props;
+const [notation,setnotation]=React.useState(notationid)
+
+React.useEffect(()=>
+{
+setnotation(notationid)
+
+},[notationid])
+var anonymat;
+
+if(rows[notation])
+anonymat=rows[notation].anonymat_number 
+
+
+
+
+return(
+<Modal open={notation>-1}  >
+<Box sx={style}>
+<Button onClick={()=>{setnotation(notation-1)}}>precedant</Button>
+  <Button onClick={()=>{setnotation(notation+1)}}>suivant</Button>
+
+</Box>
+
+</Modal>
+)
+}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -220,6 +242,9 @@ EnhancedTableToolbar.propTypes = {
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [remove,setremove] = React.useState("")
+  const [rows,setrows]=React.useState([])
+  const [notation,setnotation]=React.useState(-1)
+  const{id}=useParams()
   const handleClose = () => {
     setremove("");
 };
@@ -253,6 +278,15 @@ EnhancedTableToolbar.propTypes = {
     setSelected(newSelected);
   };
 
+  const updatetournamentcandidates=async ()=>
+  {
+      const response= await axios.get("http://127.0.0.1:8000/tournaments/"+id+"/candidates")
+      setrows(response.data)
+  }
+
+  React.useEffect(() => {
+        updatetournamentcandidates()
+  },[])
 
 
 
@@ -290,7 +324,7 @@ EnhancedTableToolbar.propTypes = {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.anonymat}
+                      key={row.anonymat_number}
                       selected={isItemSelected}
                     >
 
@@ -301,27 +335,23 @@ EnhancedTableToolbar.propTypes = {
                         scope="row"
                         padding="none"
                       >
-                        {row.anonymat}
+                        {row.anonymat_number}
                       </TableCell>
                       <TableCell >{row.nm}</TableCell>
-                      <TableCell><IconButton onClick={()=>setremove(row.anonymat)}><Remove/></IconButton> <IconButton><Article/></IconButton></TableCell>
+                      <TableCell><IconButton onClick={()=>setremove(row.anonymat)}><Remove/></IconButton> <IconButton onClick={()=>{setnotation(index)}}><Article/></IconButton></TableCell>
                     </TableRow>
                   );
                 })}
             
-                <TableRow
-                  style={{
-                    height:40,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
+                
         
             </TableBody>
           </Table>
         </TableContainer>
 
       </Paper>
+
+      <NotationDialog notationid={notation}  rows={rows}/>
 
       <Dialog open={(remove)} onClose={handleClose}>
         <DialogTitle>retirer un candidat</DialogTitle>
