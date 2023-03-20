@@ -24,6 +24,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import axios from "axios";
+import { tournamentslist } from "../../data";
 
 
 
@@ -63,6 +64,7 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
+
   {
     id: 'name',
     numeric: false,
@@ -137,6 +139,11 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
+  const [add,setadd]=React.useState(false)
+  const handleclose= ()=>
+  {
+    setadd(false)
+  }
    const navigate =useNavigate()
   return (
     <Toolbar
@@ -170,18 +177,11 @@ function EnhancedTableToolbar(props) {
       )}
 
       {numSelected > 0 ? (
-        <div style={{display:'flex'}}>
         <Tooltip title="Delete">
           <IconButton>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip title="modifier les information de ce candidat">
-            <IconButton>
-              <Edit/>
-            </IconButton>
-        </Tooltip>
-        </div>
 
       ) : (
         <Tooltip title="Filter list">
@@ -191,10 +191,39 @@ function EnhancedTableToolbar(props) {
         </Tooltip>
       )}
     <Tooltip title="ajouter un nouveau candidat">
-          <IconButton onClick={()=>{navigate("add")}}>
+          <IconButton onClick={()=>{setadd(true)}}>
             <Add />
           </IconButton>
         </Tooltip>
+
+        <Dialog open={add} onClose={handleclose}>
+<DialogTitle>ajouter un candidat</DialogTitle>
+<DialogContent>
+<DialogContentText>
+selectionez le concour !
+
+</DialogContentText>
+
+<Stack spacing={3}>
+
+{
+  Object.keys(tournamentslist).map(t=>
+  {
+    return(
+      <Button variant="contained" onClick={()=>{navigate("add/"+t)}}>{tournamentslist[t]}</Button>
+      
+    )
+  })
+}
+
+
+
+</Stack>
+</DialogContent>
+<DialogActions>
+<Button onClick={handleclose}>annuler</Button>
+</DialogActions>
+</Dialog>
     </Toolbar>
   );
 }
@@ -289,13 +318,13 @@ console.log(rows)
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -303,7 +332,7 @@ console.log(rows)
                       selected={isItemSelected}
                     >
 
-             
+
                       <TableCell
                         component="th"
                         id={labelId}

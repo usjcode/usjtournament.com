@@ -48,10 +48,6 @@ const {update,setupdate}=props
     handleClose()
   }
 
-
-  
-
-
     const handleClose = () => {
         setupdate(-1);
     };
@@ -106,41 +102,51 @@ const {update,setupdate}=props
 function TournamentAddDialog(props)
 {
 
-  const [value, setValue] = React.useState('2014-08-18');
+  const [datei, setdatei] = React.useState(moment('2014-08-18'));
+  const [dated, setdated] = React.useState(moment('2014-08-18'));
   const {open,setOpen,updatetournaments}=props
 const [description,setdescription]=useState("")
 const [tournament,settournament]=useState("cl1i")
+const [error1,seterror1]=useState(false)
 
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
 
-  const createtournament= async ()=>
+  async function  createtournament  ()
   {
     const response= await  axios.post('http://127.0.0.1:8000/tournaments/',
     {
       "type":tournament,
       "description":description,
-      "date_debut":value,
+      "date_debut":dated.format("YYYY-MM-DD"),
+      "date_inscription":datei.format("YYYY-MM-DD"),
       "nbr_place":100
     })
-      updatetournaments()
+    updatetournaments()
+    console.log(response)
+    return response.status
       
 
   }
 
-
-  const submit = ()=>
+  const showexist =()=>
   {
-    createtournament()
-    handleClose()
+    seterror1(true)
+  }
+  
+
+
+  const submit =  async ()=>
+  {
+    (await createtournament()==201)?handleClose():showexist()
+
   }
 
     const handleClose = () => {
         setOpen(false);
+        seterror1(false)
     };
-    
+
+
     return(
         <Dialog open={open} onClose={handleClose}>
         <DialogTitle>ajouter un concours</DialogTitle>
@@ -182,17 +188,19 @@ const [tournament,settournament]=useState("cl1i")
           label="Date limite d'inscription"
           inputFormat="MM/DD/YYYY"
           fullWidth
-          onChange={handleChange}
-          value={value}
+          onChange={setdatei}
+
+          value={datei}
           renderInput={(params) => <TextField {...params} />}
         />
 
 <DesktopDatePicker
           label="date de début"
           inputFormat="MM/DD/YYYY"
-          onChange={handleChange}
-          value={value}
+          onChange={setdated}
+          value={dated}
           fullWidth
+          minDate={datei}
                   renderInput={(params) => <TextField {...params} />}
         />
         </Stack>
@@ -203,6 +211,22 @@ const [tournament,settournament]=useState("cl1i")
           <Button onClick={handleClose}>annuler</Button>
           <Button onClick={submit}>valider</Button>
         </DialogActions>
+
+        <Dialog open={error1} onClose={handleClose}>
+        <DialogTitle>ajouter un concours</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            il exist deja un concours encours pour 
+            <br/>
+            {tournamentslist[tournament]}
+          </DialogContentText>
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>ok</Button>
+        </DialogActions>
+      </Dialog>
+      
       </Dialog>
       
 
@@ -250,8 +274,6 @@ export function Tournamentslist()
            {
             tournaments.map(t=>{
              
-
-            
               return(
                 <Card sx={{ minWidth: 275,marginTop:2 }}>
                 <CardContent>

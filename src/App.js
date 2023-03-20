@@ -25,10 +25,12 @@ function App() {
       <Route index element={<Tournaments />} />
       <Route path="staff" element={<Staff />} />
       <Route path="staff/:id" element={<StaffMember />} />
+      <Route path="staff/invitations" element={<StaffMember />} />
+
 
       <Route path="candidates" >
       <Route index element={<Candidates />}/>
-      <Route path="add" element={<Add />} />
+      <Route path="add/:type" element={<Add />} />
 
 
       </Route>

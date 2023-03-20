@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Grid, Paper, Stack, Typography } from "@mui/material";
 import logo from '../../assets/logo.jpg'
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
@@ -22,24 +22,40 @@ export function StaffMember()
     return(
         
 (member)&&(
-    <Box >
+    <Box sx={{
+    
+        width:"100%",
+        textAlign:"center",
+        backgroundColor:"#fff",
+        top:100
+    }} >
         
-    <Paper  sx={{padding:10}}>
-    <Avatar sx={{borderColor:"#333",borderWidth:3,borderStyle:"solid"}} style={{width:200,height:200}} src={"http://127.0.0.1:8000/"+member.Avatar}/> 
+    <Avatar sx={{borderColor:"#333",borderWidth:3,borderStyle:"solid",margin:"auto",bottom:100}} style={{width:200,height:200}} src={"http://127.0.0.1:8000/"+member.avatar}/> 
 
        <Box>
-       <Typography>{member.contact}</Typography>
-       <Typography>directeur</Typography>
-       <Typography>{member.email}</Typography>
+       <Typography  sx={{ fontSize: 20,mb:3}}>directeur</Typography>
+       <Grid container spacing={2} padding={5}>
+  <Grid item xs={4}>
+  <Typography>{member.email}</Typography>
+  </Grid>
+  <Grid item xs={4}>
+  <Typography>{member.contact}</Typography>
+
+  </Grid>
+  <Grid item xs={4}>
+  <Typography>{member.contact}</Typography>
+  </Grid>
+</Grid>
 
 
 
        </Box>
-       <Button>vos information</Button>
-       <Button>supprimer le compte</Button>
+       <Stack  width={"100%"} direction="row" spacing={2} justifyContent={"center"}>
+       <Button variant="contained">vos information</Button>
+       <Button color="error" variant="contained">supprimer le compte</Button>
+       </Stack>
 
 
-    </Paper>
    </Box>
 )
         

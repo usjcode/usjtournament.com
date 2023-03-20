@@ -23,12 +23,8 @@ export default  function Login()
    <TextField
             labelText="Email"
             id="email"
-            placeholder="email"
-            
-            
+            placeholder="email"   
               fullWidth
-            
-  
           />
           <TextField
             labelText="Password"

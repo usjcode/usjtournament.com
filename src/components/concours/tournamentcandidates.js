@@ -170,7 +170,8 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected,tournament } = props;
+console.log(tournament)
 
   return (
     <Toolbar
@@ -201,7 +202,18 @@ function EnhancedTableToolbar(props) {
         >
           Liste des candidatures
         </Typography>
+        
       )}
+
+<Typography
+          sx={{ flex: '1 1 100%' }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          {/* débute le {tournament.date_debut} */}
+          en cours ....
+        </Typography>
 
       {numSelected > 0 ? (
         <div style={{display:'flex'}}>
@@ -224,11 +236,7 @@ function EnhancedTableToolbar(props) {
           </IconButton>
         </Tooltip>
       )}
-    <Tooltip title="ajouter un nouveau candidat">
-          <IconButton>
-            <Add />
-          </IconButton>
-        </Tooltip>
+
     </Toolbar>
   );
 }
@@ -244,10 +252,19 @@ EnhancedTableToolbar.propTypes = {
   const [remove,setremove] = React.useState("")
   const [rows,setrows]=React.useState([])
   const [notation,setnotation]=React.useState(-1)
+  const [tournamentdata,settournamentdata]=React.useState({})
   const{id}=useParams()
   const handleClose = () => {
     setremove("");
 };
+
+const gettournamentdata =async()=>
+{
+  const response= await axios.get("http://127.0.0.1:8000/tournaments/"+id)
+  settournamentdata(response.data)
+  
+}
+
 
 
   const handleRequestSort = (event, property) => {
@@ -278,6 +295,8 @@ EnhancedTableToolbar.propTypes = {
     setSelected(newSelected);
   };
 
+
+
   const updatetournamentcandidates=async ()=>
   {
       const response= await axios.get("http://127.0.0.1:8000/tournaments/"+id+"/candidates")
@@ -286,6 +305,7 @@ EnhancedTableToolbar.propTypes = {
 
   React.useEffect(() => {
         updatetournamentcandidates()
+        gettournamentdata()
   },[])
 
 
@@ -298,7 +318,7 @@ EnhancedTableToolbar.propTypes = {
   return (
     <Box sx={{ width: '100%',height:'100%' }}>
       <Paper sx={{ width: '100%', mb: 2 ,height:"100%",overflow:'auto'}}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} tournament={tournamentdata} />
         <TableContainer >
           <Table
             sx={{ minWidth: 750 }}

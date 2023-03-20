@@ -1,5 +1,5 @@
 import { Button, Card, CardActionArea, CardContent, CardMedia, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Fab, TextField, Typography } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, Mail } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -106,8 +106,12 @@ export function Stafflist()
 
             </div>
         
-            <Fab color="primary" aria-label="add" onClick={handleClickOpen} sx={{right:0,bottom:0,position:"absolute"}}>
+            <Fab color="primary" aria-label="add" onClick={handleClickOpen} sx={{right:0,bottom:0,position:"fixed"}}>
         <Add/>
+      </Fab>
+              
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen} sx={{right:0,bottom:100,position:"fixed"}}>
+        <Mail/>
       </Fab>
       <StaffAddDialog open={open} setOpen={setOpen}/>
         </div>
