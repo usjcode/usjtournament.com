@@ -411,8 +411,6 @@ export function Candidateslist()
     return (
         <div className="clw">
         <CandidateTable/>
-
-
         </div>
     )
 }
