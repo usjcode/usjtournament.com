@@ -105,7 +105,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={ 'left'}
+            align={'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -139,12 +139,11 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTableToolbar(props) {
   const { numSelected } = props;
-  const [add,setadd]=React.useState(false)
-  const handleclose= ()=>
-  {
+  const [add, setadd] = React.useState(false)
+  const handleclose = () => {
     setadd(false)
   }
-   const navigate =useNavigate()
+  const navigate = useNavigate()
   return (
     <Toolbar
       sx={{
@@ -190,40 +189,39 @@ function EnhancedTableToolbar(props) {
           </IconButton>
         </Tooltip>
       )}
-    <Tooltip title="ajouter un nouveau candidat">
-          <IconButton onClick={()=>{setadd(true)}}>
-            <Add />
-          </IconButton>
-        </Tooltip>
+      <Tooltip title="ajouter un nouveau candidat">
+        <IconButton onClick={() => { setadd(true) }}>
+          <Add />
+        </IconButton>
+      </Tooltip>
 
-        <Dialog open={add} onClose={handleclose}>
-<DialogTitle>ajouter un candidat</DialogTitle>
-<DialogContent>
-<DialogContentText>
-selectionez le concour !
+      <Dialog open={add} onClose={handleclose}>
+        <DialogTitle>ajouter un candidat</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            selectionez le concour !
 
-</DialogContentText>
+          </DialogContentText>
 
-<Stack spacing={3}>
+          <Stack spacing={3}>
 
-{
-  Object.keys(tournamentslist).map(t=>
-  {
-    return(
-      <Button variant="contained" onClick={()=>{navigate("add/"+t)}}>{tournamentslist[t]}</Button>
-      
-    )
-  })
-}
+            {
+              Object.keys(tournamentslist).map(t => {
+                return (
+                  <Button variant="contained" onClick={() => { navigate("add/" + t) }}>{tournamentslist[t]}</Button>
 
+                )
+              })
+            }
 
 
-</Stack>
-</DialogContent>
-<DialogActions>
-<Button onClick={handleclose}>annuler</Button>
-</DialogActions>
-</Dialog>
+
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleclose}>annuler</Button>
+        </DialogActions>
+      </Dialog>
     </Toolbar>
   );
 }
@@ -232,34 +230,31 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
- function CandidateTable() {
+function CandidateTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
-  const [remove,setremove] = React.useState(undefined)
-  const [rows,setrows]=React.useState([])
+  const [remove, setremove] = React.useState(undefined)
+  const [rows, setrows] = React.useState([])
   const handleClose = () => {
     setremove(undefined);
-};
+  };
 
-const updatecandidates=async ()=>
-{
-    const response= await axios.get("http://127.0.0.1:8000/candidates/")
+  const updatecandidates = async () => {
+    const response = await axios.get("http://127.0.0.1:8000/candidates/")
     setrows(response.data)
-}
+  }
 
-const removecandidate=async (id)=>
-{
-  const response= await axios.delete("http://127.0.0.1:8000/candidates/"+id)
-  updatecandidates()
+  const removecandidate = async (id) => {
+    const response = await axios.delete("http://127.0.0.1:8000/candidates/" + id)
+    updatecandidates()
 
 
-}
+  }
 
-React.useEffect(()=>
-{
-  updatecandidates()
-},[])
+  React.useEffect(() => {
+    updatecandidates()
+  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -295,13 +290,13 @@ React.useEffect(()=>
 
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-var setremcni=""
+  var setremcni = ""
 
-console.log(rows)
+  console.log(rows)
 
   return (
-    <Box sx={{ width: '100%',height:'100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 ,height:"100%",overflow:'auto'}}>
+    <Box sx={{ width: '100%', height: '100%' }}>
+      <Paper sx={{ width: '100%', mb: 2, height: "100%", overflow: 'auto' }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer >
           <Table
@@ -318,99 +313,96 @@ console.log(rows)
             />
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                const isItemSelected = isSelected(row.id);
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.id}
-                      selected={isItemSelected}
+                return (
+                  <TableRow
+                    hover
+                    onClick={(event) => handleClick(event, row.id)}
+                    role="checkbox"
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.id}
+                    selected={isItemSelected}
+                  >
+
+
+                    <TableCell
+                      component="th"
+                      id={labelId}
+                      scope="row"
+                      padding="none"
                     >
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="left">{row.cni_number}</TableCell>
+                    <TableCell align="left">{tournamentslist[row.tournament.type]}</TableCell>
+                    <TableCell align="left">
+                      <IconButton><Edit /></IconButton>
+                      <IconButton><RemoveRedEye /></IconButton>
+                      <IconButton onClick={(e) => { e.stopPropagation(); setremove(row) }}><DeleteIcon /></IconButton>
+
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
 
 
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                      >
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="left">{row.cni_number}</TableCell>
-                      <TableCell align="left">{row.tournament.type}</TableCell>
-                      <TableCell align="left">
-                        <IconButton><Edit/></IconButton>
-                        <IconButton><RemoveRedEye/></IconButton>
-                        <IconButton onClick={(e)=>{e.stopPropagation();setremove(row)}}><DeleteIcon/></IconButton>
 
-                        </TableCell>
-                    </TableRow>
-                  );
-                })}
-            
-
-        
             </TableBody>
           </Table>
         </TableContainer>
 
       </Paper>
-{
-(remove)&&(
-<Dialog open={remove} onClose={handleClose}>
-<DialogTitle>retirer un candidat</DialogTitle>
-<DialogContent>
-<DialogContentText>
-vous appretez a supprimer une candidature  si vous etes conscient de cela 
-saisisez
-<br/>
-{remove.cni_number}
-</DialogContentText>
+      {
+        (remove) && (
+          <Dialog open={remove} onClose={handleClose}>
+            <DialogTitle>retirer un candidat</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                vous appretez a supprimer une candidature  si vous etes conscient de cela
+                saisisez
+                <br />
+                {remove.cni_number}
+              </DialogContentText>
 
-<Stack spacing={3}>
-<TextField
-    autoFocus
-    margin="dense"
-    id="cni"
-    label="courte description"
-    type="text"
-    fullWidth
-    onChange={(e)=>{setremcni=e.target.value}}
-  />
+              <Stack spacing={3}>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="cni"
+                  label="courte description"
+                  type="text"
+                  fullWidth
+                  onChange={(e) => { setremcni = e.target.value }}
+                />
 
 
-</Stack>
-</DialogContent>
-<DialogActions>
-  <Button onClick={()=>
-  {
-    if(setremcni==remove.cni_number)
-       {
-        removecandidate(remove.id)
-        handleClose()
-       }
-     
-  }}>retirer</Button>
-</DialogActions>
-</Dialog>)
-}
- 
+              </Stack>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => {
+                if (setremcni === remove.cni_number) {
+                  removecandidate(remove.id)
+                  handleClose()
+                }
+
+              }}>retirer</Button>
+            </DialogActions>
+          </Dialog>)
+      }
+
     </Box>
   );
 }
 
 
-export function Candidateslist()
-{
-    
-    return (
-        <div className="clw">
-        <CandidateTable/>
-        </div>
-    )
+export function Candidateslist() {
+
+  return (
+    <div className="clw">
+      <CandidateTable />
+    </div>
+  )
 }

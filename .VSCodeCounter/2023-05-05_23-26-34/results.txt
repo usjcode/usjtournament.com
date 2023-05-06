@@ -1,0 +1,78 @@
+Date : 2023-05-05 23:26:34
+Directory : /home/ngdream/Documents/GitHub/usjtournament.com/src
+Total : 35 files,  2166 codes, 17 comments, 519 blanks, all 2702 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         27 |      1,966 |         17 |        467 |      2,450 |
+| CSS        |          7 |        199 |          0 |         52 |        251 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                             | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                |         35 |      2,166 |         17 |        519 |      2,702 |
+| . (Files)                                                                                        |          9 |        176 |          7 |         34 |        217 |
+| components                                                                                       |         10 |      1,641 |          8 |        416 |      2,065 |
+| components/about                                                                                 |          2 |         32 |          0 |         22 |         54 |
+| components/candidats                                                                             |          2 |        706 |          4 |        152 |        862 |
+| components/concours                                                                              |          2 |        587 |          4 |        138 |        729 |
+| components/invitations                                                                           |          1 |        111 |          0 |         44 |        155 |
+| components/sidebar                                                                               |          2 |         94 |          0 |         34 |        128 |
+| components/staff                                                                                 |          1 |        111 |          0 |         26 |        137 |
+| context                                                                                          |          1 |         87 |          0 |         11 |         98 |
+| pages                                                                                            |         13 |        210 |          0 |         41 |        251 |
+| pages/about                                                                                      |          2 |         40 |          0 |          9 |         49 |
+| pages/candidats                                                                                  |          3 |         24 |          0 |          3 |         27 |
+| pages/concours                                                                                   |          3 |         29 |          0 |          2 |         31 |
+| pages/invitations                                                                                |          1 |          6 |          0 |          4 |         10 |
+| pages/login                                                                                      |          1 |         42 |          0 |          4 |         46 |
+| pages/personnel                                                                                  |          3 |         69 |          0 |         19 |         88 |
+| utils                                                                                            |          2 |         52 |          2 |         17 |         71 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                         | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/App.css                                     | CSS        |         68 |          0 |         13 |         81 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/App.js                                      | JavaScript |         43 |          0 |          9 |         52 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/App.test.js                                 | JavaScript |          7 |          0 |          2 |          9 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/about/aboutcontent.js            | JavaScript |         23 |          0 |         17 |         40 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/about/navigation.js              | JavaScript |          9 |          0 |          5 |         14 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/candidats/addtabs.js             | JavaScript |        359 |          0 |         87 |        446 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/candidats/candidateslist.js      | JavaScript |        347 |          4 |         65 |        416 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/concours/tournamentcandidates.js | JavaScript |        346 |          4 |         71 |        421 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/concours/tournamentslist.js      | JavaScript |        241 |          0 |         67 |        308 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/invitations/invitationlist.js    | JavaScript |        111 |          0 |         44 |        155 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/sidebar/sidebar.css              | CSS        |         56 |          0 |         26 |         82 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/sidebar/sidebar.js               | JavaScript |         38 |          0 |          8 |         46 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/components/staff/stafflist.js               | JavaScript |        111 |          0 |         26 |        137 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/context/authcontext.js                      | JavaScript |         87 |          0 |         11 |         98 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/data.js                                     | JavaScript |         17 |          0 |          2 |         19 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/index.css                                   | CSS        |         12 |          0 |          2 |         14 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/index.js                                    | JavaScript |         15 |          3 |          3 |         21 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/logo.svg                                    | XML        |          1 |          0 |          0 |          1 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/about/about.css                       | CSS        |         30 |          0 |          7 |         37 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/about/about.js                        | JavaScript |         10 |          0 |          2 |         12 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/candidats/add.js                      | JavaScript |          8 |          0 |          1 |          9 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/candidats/candidates.css              | CSS        |          8 |          0 |          1 |          9 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/candidats/candidates.js               | JavaScript |          8 |          0 |          1 |          9 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/concours/tournament.js                | JavaScript |          8 |          0 |          0 |          8 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/concours/tournaments.css              | CSS        |         13 |          0 |          2 |         15 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/concours/tournaments.js               | JavaScript |          8 |          0 |          0 |          8 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/invitations/invitations.js            | JavaScript |          6 |          0 |          4 |         10 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/login/login.js                        | JavaScript |         42 |          0 |          4 |         46 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/personnel/staff.css                   | CSS        |         12 |          0 |          1 |         13 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/personnel/staff.js                    | JavaScript |          8 |          0 |          3 |         11 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/pages/personnel/staffmember.js              | JavaScript |         49 |          0 |         15 |         64 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/reportWebVitals.js                          | JavaScript |         12 |          0 |          2 |         14 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/setupTests.js                               | JavaScript |          1 |          4 |          1 |          6 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/utils/privateroute.js                       | JavaScript |         24 |          2 |          6 |         32 |
+| /home/ngdream/Documents/GitHub/usjtournament.com/src/utils/useAxios.js                           | JavaScript |         28 |          0 |         11 |         39 |
+| Total                                                                                            |            |      2,166 |         17 |        519 |      2,702 |
++--------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
